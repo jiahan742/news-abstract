@@ -2,9 +2,8 @@ name: Python Package using Conda
 
 on: [push]
 
-# 全局环境变量：提前使用 Node 24，消除 setup-miniconda 弃用警告
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # 提前适配 Node 24
 
 jobs:
   build-linux:
@@ -16,17 +15,10 @@ jobs:
     - name: Set up Miniconda
       uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: "3.10"
         auto-activate: true
-        activate-environment: base
-        conda-remove-defaults: true   # 禁止隐式 defaults 频道
-        channels: conda-forge         # 只用 conda-forge
-
-    - name: Install dependencies
-      shell: bash -l {0}
-      run: |
-        conda install -y flake8 pytest beautifulsoup4
-        pip install langdetect
+        activate-environment: news-abstract   # 激活我们在 yml 中定义的环境
+        environment-file: environment.yml     # 根据此文件创建环境
+        conda-remove-defaults: true           # 保持频道干净
 
     - name: Lint with flake8
       shell: bash -l {0}
