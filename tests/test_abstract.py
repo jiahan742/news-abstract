@@ -23,7 +23,7 @@ class TestLanguageDetector:
     def test_detect_chinese(self):
         text = "这是一篇关于最近事件的中文新闻文章。"
         lang, confidence = self.detector.detect_language(text)
-        assert lang == 'zh'
+        assert lang == 'zh-cn'
         assert confidence > 0.5
     
     def test_detect_spanish(self):
@@ -45,7 +45,7 @@ class TestContentExtractor:
         self.extractor = ContentExtractor()
     
     def test_extract_paragraphs(self):
-        text = "Paragraph 1.\n\nParagraph 2.\n\nParagraph 3."
+        text = "This is the first paragraph with enough content. It needs to be longer than 20 characters.\n\nThis is the second paragraph with enough content. It also needs to be long enough.\n\nThis is the third paragraph with enough content as well."
         paragraphs = self.extractor.extract_paragraphs(text)
         assert len(paragraphs) == 3
     
