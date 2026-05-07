@@ -1,0 +1,11 @@
+name: news-abstract
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - flake8
+  - pytest
+  - beautifulsoup4
+  - pip
+  - pip:
+      - langdetect
