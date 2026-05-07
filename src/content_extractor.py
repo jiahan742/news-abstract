@@ -21,7 +21,7 @@ class ContentExtractor:
     """
 
     def __init__(self):
-        self.min_content_length = 100  # Minimum characters for valid content
+        self.min_content_length = 20  # Minimum characters for valid content (reduced from 100)
         
         # Common unwanted text patterns
         self.noise_patterns = [
