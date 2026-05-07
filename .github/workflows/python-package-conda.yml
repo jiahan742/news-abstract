@@ -10,6 +10,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v5
+
     - name: Set up Miniconda
       uses: conda-incubator/setup-miniconda@v3
       with:
@@ -21,16 +22,16 @@ jobs:
       shell: bash -l {0}
       run: |
         conda install -y flake8 pytest python=3.10
+        pip install langdetect
 
     - name: Lint with flake8
       shell: bash -l {0}
       run: |
-        conda install -y flake8
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest
       shell: bash -l {0}
       run: |
-        conda install -y pytest
+        export PYTHONPATH=./src
         pytest
